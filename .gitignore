@@ -128,3 +128,4 @@ changelogs/.plugin-cache.yaml
 notes
 vault*
 .ansible
+*.enc
