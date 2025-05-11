@@ -1,0 +1,9 @@
+os: "linux"
+arch: "amd64"
+
+vip: 192.168.5.210
+kube_vip_version: v0.9.1
+
+ansible_become: true
+ansible_become_method: sudo
+ansible_user: leon

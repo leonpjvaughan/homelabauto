@@ -1,0 +1,35 @@
+# Create a directory to download RKE2 binary to
+- name: Create directory for RKE2 binary downlad
+  ansible.builtin.file:
+    path: "{{ rke2_download_dir }}/{{  rke2_version }}"
+    state: directory
+    mode: '0755'
+
+- name: Create directory for RKE2 binary
+  ansible.builtin.file:
+    path: "{{ rke2_install_dir }}"
+    state: directory
+    mode: '0755'
+
+# Download the RKE2 binary
+- name: Download RKE2 binary
+  ansible.builtin.get_url:
+    url: "{{ rke2_binary_url }}"
+    dest: "{{ rke2_download_dir }}/{{  rke2_version }}/rke2"
+    mode: '0755'
+
+# copy from download dir to install dir
+- name: Copy RKE2 binary to install directory
+  ansible.builtin.copy:
+    src: "{{ rke2_download_dir }}/{{ rke2_version }}/rke2"
+    dest: "{{ rke2_install_dir }}/rke2"
+    mode: '0755'
+    remote_src: true
+  become: true
+
+# Set permissions on the RKE2 binary
+- name: Set executable permissions on the RKE2 binary
+  ansible.builtin.file:
+    path: "{{ rke2_install_dir }}/rke2"
+    mode: '0755'
+    state: file

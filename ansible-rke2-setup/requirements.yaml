@@ -1,0 +1,8 @@
+# ansible-galaxy install -r requirements.yaml
+# roles: ...
+
+collections:
+  - name: ansible.utils
+  - name: community.general
+  - name: ansible.posix
+  - name: kubernetes.core

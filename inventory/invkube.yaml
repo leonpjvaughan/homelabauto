@@ -1,10 +1,15 @@
-kubemaster:
+kubemanager:
   hosts:
-    192.168.5.20[1:3]:    # proxmox vms
+    km1:  # proxmox vms
+      ansible_host: 192.168.5.201
+    km2:  # proxmox vms
+      ansible_host: 192.168.5.202
+    km3:  # proxmox vms
+      ansible_host: 192.168.5.203
 
 kubeworker:
   hosts:
-    192.168.5.22[1:8]:    # proxmox vms
+    192.168.5.22[1:7]:    # proxmox vms
     192.168.5.51:         # rpi
       ansible_become: true
 
@@ -12,5 +17,5 @@ kubeworker:
 
 kubeall:
   children:
-    kubemaster:
+    kubemanager:
     kubeworker:
