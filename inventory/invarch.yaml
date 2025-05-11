@@ -1,0 +1,8 @@
+x64:
+  hosts:
+    192.168.5.20[1:3]:    # proxmox vms
+    192.168.5.22[1:6]:    # proxmox vms
+
+arm:
+  hosts:
+    192.168.5.51:         # rpi

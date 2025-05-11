@@ -1,0 +1,12 @@
+- name: Update package list
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Upgrade installed packages
+  ansible.builtin.apt:
+    upgrade: dist
+
+- name: Remove unnecessary packages
+  ansible.builtin.apt:
+    autoremove: true
+    purge: true

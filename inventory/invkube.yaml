@@ -1,0 +1,17 @@
+kubemaster:
+  hosts:
+    192.168.5.20[1:3]:    # proxmox vms
+
+kubeworker:
+  hosts:
+    192.168.5.22[1:6]:    # proxmox vms
+    192.168.5.51:         # rpi
+      ansible_become: true
+      ansible_become_password: "{{ vault_rpi_password }}"
+
+
+
+kubeall:
+  children:
+    kubemaster:
+    kubeworker:
