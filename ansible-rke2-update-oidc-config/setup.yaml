@@ -1,0 +1,39 @@
+- name: Add config update to rke2
+  hosts: kubeall
+  gather_facts: true
+  tasks:
+    - name: Ensure RKE2 config directory exists
+      ansible.builtin.file:
+        path: /etc/rancher/rke2/config.yaml.d
+        state: directory
+        mode: '0755'
+    - name: Update RKE2 config
+      ansible.builtin.template:
+        src: templates/rke2-oidc-ca.j2
+        dest: /etc/rancher/rke2/oidc-ca.crt
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Update RKE2 config
+      ansible.builtin.template:
+        src: templates/rke2-config-update.j2
+        dest: /etc/rancher/rke2/config.yaml.d/02-enable-oidc.yaml
+        owner: root
+        group: root
+        mode: '0644'
+      notify:
+        - Restart RKE2 server
+        - Restart RKE2 agent
+
+  handlers:
+    - name: Restart RKE2 server
+      when: inventory_hostname in groups['kubemanager']
+      ansible.builtin.systemd:
+        name: rke2-server
+        state: restarted
+
+    - name: Restart RKE2 agent
+      when: inventory_hostname in groups['kubeworker']
+      ansible.builtin.systemd:
+        name: rke2-agent
+        state: restarted

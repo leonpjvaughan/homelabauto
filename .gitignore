@@ -129,3 +129,4 @@ notes
 vault*
 .ansible
 *.enc
+*secret*

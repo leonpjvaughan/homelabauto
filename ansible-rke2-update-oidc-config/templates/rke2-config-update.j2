@@ -1,0 +1,8 @@
+kube-apiserver-arg:
+  - "--oidc-issuer-url=https://keycloak.mydomain.com/realms/master"
+  - "--oidc-client-id=rke2-cluster"
+  - "--oidc-username-claim=preferred_username"
+  - "--oidc-groups-claim=groups"
+  - "--oidc-ca-file=/etc/rancher/rke2/oidc-ca.crt"
+  - "--oidc-username-prefix=oidc:"
+  - "--oidc-groups-prefix=oidc:"
